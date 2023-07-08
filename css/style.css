@@ -16,6 +16,11 @@ nav {
   justify-content: space-between;
 }
 
+#contenedor {
+  display: grid;
+  grid-template-columns: repeat(auto-fill,350px);
+}
+
 .nav__logo {
   display: flex;
   flex-wrap: wrap;

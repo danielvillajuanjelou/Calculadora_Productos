@@ -1,24 +1,124 @@
+// import { Producto } from "./ProductoClass.js";
+class Producto {
+  constructor(id, nombre, precio, categoria) {
+    this.id = id;
+    this.nombre = nombre;
+    this.precio = precio;
+    this.categoria = categoria;
+  }
+}
+const arrayProductos = [
+  new Producto(1, "Viola 16 pulgadas", 650, "instrumentos"),
+  new Producto(2, "Violin 4/4", 500, "instrumentos"),
+  new Producto(
+    3,
+    "RockJam Kit de piano de teclado con pantalla táctil",
+    300,
+    "instrumentos"
+  ),
+  new Producto(
+    4,
+    "D Z Strad - Viola de 15,5 pulgadas hecha a mano",
+    1500,
+    "instrumentos"
+  ),
+  new Producto(
+    5,
+    "Sabomenia Violin Dreamer D10 hecho a mano",
+    299,
+    "instrumentos"
+  ),
+  new Producto(
+    6,
+    "Starument Piano de teclado eléctrico prémium",
+    149,
+    "instrumentos"
+  ),
+  new Producto(7, "D'Addario Kaplan Premium Rosin", 8, "accesorios"),
+  new Producto(
+    8,
+    "Bernardel Original – Colofonia para violín y viola",
+    12,
+    "accesorios"
+  ),
+];
+
+const carrito = [];
+
 //DOM, cambio de cantidad de artículos
+
 let minusBtn = document.querySelector(".input__minus");
 let plusBtn = document.querySelector(".input__plus");
 let userInput = document.querySelector(".input__number");
+let contenedor = document.getElementById("contenedor");
+
+arrayProductos.forEach((el,index)=>{
+  const section = document.createElement("section");
+  section.classList.add("card");
+  section.id = "producto" + (index + 1);
+  const articule = `
+                      <article class="card__img"></article>
+                        <article class="card__title">
+                          ${el.nombre}
+                          <div class="card__description">
+                            <p>
+                              El kit de piano de teclado RockJam 761 incluye un teclado digital
+                              con 61 teclas de tamaño completo mientras mantiene un diseño
+                              portátil y compacto que puede ser alimentado por red eléctrica
+                              (fuente de alimentación incluida) o baterías
+                            </p>
+                          </div>
+                          <div class="card__price">$${el.precio}</div>
+                          <div class="card__product-quantity">
+                            <div class="input">
+                              <img
+                                class="input__minus"
+                                src="./recursos/icon-minus.svg"
+                                alt="minus"
+                              />
+                              <input class="input__number" type="number" value="0" />
+                              <img
+                                class="input__plus"
+                                src="./recursos/icon-plus.svg"
+                                alt="plus"
+                              />
+                            </div>
+                          </div>                          
+                        </article>`
+  section.innerHTML = articule;
+
+  const div = document.createElement("div");
+  const button = document.createElement("button");
+
+  div.classList.add("cart__button")
+  button.innerHTML = ` Añadir al carrito
+          <img src="./recursos/shopping-cart.png" alt="carrito" />`
+
+  button.addEventListener("click",()=>{
+    carrito.push(el);
+    console.log(carrito);
+  })
+  div.appendChild(button);
+  section.appendChild(div);
+  contenedor.appendChild(section);
+})
 
 let userInputNumber = 0;
 
-plusBtn.addEventListener("click", () => {
-  userInputNumber++;
-  userInput.value = userInputNumber;
-  console.log(userInputNumber);
-});
+// plusBtn.addEventListener("click", () => {
+//   userInputNumber++;
+//   userInput.value = userInputNumber;
+//   console.log(userInputNumber);
+// });
 
-minusBtn.addEventListener("click", () => {
-  userInputNumber--;
-  if (userInputNumber <= 0) {
-    userInputNumber = 0;
-  }
-  userInput.value = userInputNumber;
-  console.log(userInputNumber);
-});
+// minusBtn.addEventListener("click", () => {
+//   userInputNumber--;
+//   if (userInputNumber <= 0) {
+//     userInputNumber = 0;
+//   }
+//   userInput.value = userInputNumber;
+//   console.log(userInputNumber);
+// });
 
 // Agregar el total de productos al carrito cuando se presiona el botón Añadir al carrito
 const addToCartBtn = document.querySelector(".cart__button");
